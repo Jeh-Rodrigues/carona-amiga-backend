@@ -6,17 +6,25 @@ const authRoutes = require('./routes/auth');
 const parceiroRoutes = require('./routes/parceiroRoutes');
 const passageiroRoutes = require('./routes/passageiroRoutes');
 const reservaRoutes = require('./routes/reservaRoutes');
+const cors = require('cors');
 
 dotenv.config();
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors(
+  //Adicinar url do front aqui
+  //{origin: 'http://yourapp.com'}
+));
 
 // Conectar ao banco de dados MongoDB
-mongoose.connect('mongodb://localhost:27017/caronaAmiga')
-  .then(() => console.log('Conectado ao MongoDB'))
-  .catch(err => console.log('Erro ao conectar ao MongoDB:', err));
+const connectDb = async ()=>{
+  await mongoose.connect("mongodb+srv://caronaUser:caronaPass@caronaamiga.rejatcs.mongodb.net/?retryWrites=true&w=majority&appName=CaronaAmiga")
+
+  console.log(`O banco está conectado através da conexão ${mongoose.connection.host}`)
+}
+connectDb()
 
 // Usando as rotas
 app.use('/api/parceiros', parceiroRoutes);
