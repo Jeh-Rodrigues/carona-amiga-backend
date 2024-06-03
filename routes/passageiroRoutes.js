@@ -15,10 +15,8 @@ router.get('/passageiros', authenticateToken, async (req, res) => {
 
 // Rota para criar um novo passageiro
 router.post('/passageiros', async (req, res) => {
-  const data_passageiro = {
-    nome: req.body['name']
-  }
-  const passageiro = new Passageiro(data_passageiro);
+  
+  const passageiro = new Passageiro(req.body);
   try {
     const novoPassageiro = await passageiro.save();
     res.status(201).json(novoPassageiro);
