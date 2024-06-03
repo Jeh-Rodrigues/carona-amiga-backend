@@ -7,16 +7,16 @@ const passageiroSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
+    //required: true,
     unique: true
   },
   telefone: {
     type: String,
-    required: true
+    //required: true
   },
   dataNascimento: {
     type: Date,
-    required: true
+    //required: true
   },
   dataCadastro: {
     type: Date,
